@@ -1,6 +1,6 @@
 # mapper-json-c
 
-> 用于将json数据根据指定实例格式化
+> 用于将json数据根据指定实例格式化 npm i mapper-json-c
 
 使用示例
 

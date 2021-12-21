@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "module": "CommonJS",
+        "lib": ["ESNext", "DOM"],
+        "experimentalDecorators": true,
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "outDir": "./build/",
+        "allowJs": true,
+        "declaration": true,
+        "declarationDir": "./build/typings/",
+        "listEmittedFiles": true,
+        "sourceMap": true
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "test",
+        "**/*.spec.ts"
+    ]
+}

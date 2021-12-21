@@ -1,0 +1,44 @@
+{
+  "name": "mapper-json-c",
+  "version": "1.0.0",
+  "description": "mapper for json",
+  "main": "build/index.js",
+  "author": "ChenQiang",
+  "license": "Anti-996License",
+  "scripts": {
+    "dev": "tsc --watch",
+    "test": "cross-env TS_NODE_PROJECT='test/tsconfig.test.json' mocha test/**/**.test.ts",
+    "build": "npm run clean && tsc",
+    "clean": "rimraf build"
+  },
+  "mocha": {
+    "require": [
+      "ts-node/register",
+      "tsconfig-paths/register"
+    ],
+    "ui": "bdd"
+  },
+  "devDependencies": {
+    "@types/mocha": "^9.0.0",
+    "chai": "^4.3.4",
+    "cross-env": "^7.0.3",
+    "mocha": "^9.1.3",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.4.0",
+    "tsconfig-paths": "^3.12.0",
+    "typescript": "^4.5.4"
+  },
+  "dependencies": {
+    "reflect-metadata": "^0.1.13"
+  },
+  "keywords": [
+    "json-mapper",
+    "jsonMapper",
+    "mapper-json",
+    "typescript-json",
+    "json-adapter",
+    "json-transformer",
+    "api-mapper",
+    "api-adapter"
+  ]
+}

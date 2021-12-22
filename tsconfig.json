@@ -4,12 +4,11 @@
         "lib": ["ESNext", "DOM"],
         "experimentalDecorators": true,
         "noImplicitAny": true,
-        "removeComments": true,
+        "removeComments": false,
         "preserveConstEnums": true,
         "outDir": "./build/",
         "allowJs": true,
         "declaration": true,
-        "declarationDir": "./build/typings/",
         "listEmittedFiles": true,
         "sourceMap": true
     },

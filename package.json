@@ -1,9 +1,9 @@
 {
   "name": "mapper-json-c",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "mapper for json",
   "main": "build/index.js",
-  "types": "build/index.d.ts",
+  "types": "build/typings/index.d.ts",
   "author": "ChenQiang",
   "license": "Anti-996License",
   "scripts": {

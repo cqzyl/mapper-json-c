@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "mapper for json",
   "main": "build/index.js",
+  "types": "build/index.d.ts",
   "author": "ChenQiang",
   "license": "Anti-996License",
   "scripts": {
@@ -11,6 +12,11 @@
     "build": "npm run clean && tsc",
     "clean": "rimraf build"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+hhttps://github.com/cqzyl/mapper-json-c.git"
+  },
+  "homepage": "hhttps://github.com/cqzyl/mapper-json-c#readme",
   "mocha": {
     "require": [
       "ts-node/register",

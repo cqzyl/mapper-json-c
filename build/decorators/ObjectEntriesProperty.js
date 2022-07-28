@@ -1,13 +1,13 @@
 "use strict";
 exports.__esModule = true;
-exports.JsonProperty = void 0;
+exports.ObjectEntriesProperty = void 0;
 /*
- * @Description: json枚举装饰器
+ * @Description: 装饰器 将 { key: value } 转化为数组 entries
  * @Author: ChenQiang
- * @Date: 2021-12-20 11:34:33
+ * @Date: 2022-07-27 17:12:03
  * @LastEditors: ChenQiang
- * @LastEditTime: 2021-12-21 11:46:05
- * @FilePath: \src\decorators\JsonProperty.ts
+ * @LastEditTime: 2022-07-27 17:12:04
+ * @FilePath: \src\decorators\ObjectEntriesProperty.ts
  */
 require("reflect-metadata");
 /**
@@ -15,16 +15,15 @@ require("reflect-metadata");
  * @param {IJsonProperty} agu
  * @return {*}
  */
-function JsonProperty(agu) {
+function ObjectEntriesProperty(agu) {
     return function (target, propertyKey) {
         /** （获取）旧的装饰器内容 */
         var cMetadata = Reflect.getMetadata(propertyKey, target) || [];
-        // TestEntity {}, 'test'
         return Reflect.defineMetadata(propertyKey, cMetadata.concat([{
-                name: 'JsonProperty',
+                name: 'ObjectEntriesProperty',
                 value: agu
             }]), target);
     };
 }
-exports.JsonProperty = JsonProperty;
-//# sourceMappingURL=JsonProperty.js.map
+exports.ObjectEntriesProperty = ObjectEntriesProperty;
+//# sourceMappingURL=ObjectEntriesProperty.js.map

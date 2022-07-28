@@ -33,6 +33,17 @@ class TestEntity {
     
     @JsonProperty({ name: 'meArr', clazz: TestEntity })
     meArr: TestEntity[] = [];
+
+    @ObjectEntriesProperty()
+    objArr1: {label:string,value:string}[] = [];
+
+    @ObjectEntriesProperty(['label','value'])
+    objArr2: {label:string,value:string}[] = [];
+
+    // 先转换属性名称，再转格式
+    @ObjectEntriesProperty(['label','value'])
+    @JsonProperty('objArr0')
+    objArr3: {label:string,value:string}[] = [];
 }
 ```
 
@@ -49,6 +60,10 @@ const json = {
     me2: { num: 2 },
     me3: { num: 3 },
     meArr: [{}],
+    
+    objArr1: {1:'v11',2:'v22'},
+    objArr2: {1:'v11',2:'v22'},
+    objArr0: {1:'v11',2:'v22'},
 }
 ```
 ### use :
@@ -72,7 +87,10 @@ TestEntity {
         me: undefined,
         me1: undefined,
         me2: undefined,
-        meArr: undefined
+        meArr: undefined,
+        objArr1: [],
+        objArr2: [],
+        objArr3: [],
     },
     me1: TestEntity {
         num: 1
@@ -83,7 +101,10 @@ TestEntity {
         me: undefined,
         me1: undefined,
         me2: undefined,
-        meArr: undefined
+        meArr: undefined,
+        objArr1: [],
+        objArr2: [],
+        objArr3: [],
     },
     me2: TestEntity {
         num: 0
@@ -94,7 +115,10 @@ TestEntity {
         me: undefined,
         me1: undefined,
         me2: undefined,
-        meArr: undefined
+        meArr: undefined,
+        objArr1: [],
+        objArr2: [],
+        objArr3: [],
     },
     meArr: [TestEntity {
         num: undefined,
@@ -105,8 +129,14 @@ TestEntity {
         me: undefined,
         me1: undefined,
         me2: undefined,
-        meArr: undefined
+        meArr: undefined,
+        objArr1: [],
+        objArr2: [],
+        objArr3: [],
     }],
+    objArr1: [['1','v11'],['2','v22']],
+    objArr2: [{label:'1',value:'v11'},{label:'2',value:'v22'}],
+    objArr3: [{label:'1',value:'v11'},{label:'2',value:'v22'}]
 }
 
 ```

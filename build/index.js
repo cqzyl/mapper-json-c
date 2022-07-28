@@ -79,7 +79,6 @@ function mapperJsonC(json, clazz) {
     Object.keys(res).forEach(function (k) {
         var key = k;
         var cMetadata = Reflect.getMetadata(key, res);
-        console.log(key, cMetadata);
         /** 当前对应json key */
         var jsonKey = key;
         /** 当前值 */

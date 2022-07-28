@@ -169,6 +169,17 @@ describe('mapperJsonC 测试', function () {
             
             @JsonProperty({ name: 'meArr', clazz: TestEntity })
             meArr: TestEntity[] = [];
+
+            @ObjectEntriesProperty()
+            objArr1: {label:string,value:string}[] = [];
+
+            @ObjectEntriesProperty(['label','value'])
+            objArr2: {label:string,value:string}[] = [];
+
+            // 先转换属性名称，再转格式
+            @ObjectEntriesProperty(['label','value'])
+            @JsonProperty('objArr0')
+            objArr3: {label:string,value:string}[] = [];
         }
         const endVal = mapperJsonC({
             num: 1,
@@ -181,6 +192,10 @@ describe('mapperJsonC 测试', function () {
             me2: { num: 2 },
             me3: { num: 3 },
             meArr: [{}],
+            
+            objArr1: {1:'v11',2:'v22'},
+            objArr2: {1:'v11',2:'v22'},
+            objArr0: {1:'v11',2:'v22'},
         }, TestEntity);
 
         expect(endVal).to.deep.equal({
@@ -198,7 +213,10 @@ describe('mapperJsonC 测试', function () {
                 me: undefined,
                 me1: undefined,
                 me2: undefined,
-                meArr: undefined
+                meArr: undefined,
+                objArr1: [],
+                objArr2: [],
+                objArr3: [],
             },
             me1: {
                 num: 1,
@@ -209,7 +227,10 @@ describe('mapperJsonC 测试', function () {
                 me: undefined,
                 me1: undefined,
                 me2: undefined,
-                meArr: undefined
+                meArr: undefined,
+                objArr1: [],
+                objArr2: [],
+                objArr3: [],
             },
             me2: {
                 num: 0,
@@ -220,7 +241,10 @@ describe('mapperJsonC 测试', function () {
                 me: undefined,
                 me1: undefined,
                 me2: undefined,
-                meArr: undefined
+                meArr: undefined,
+                objArr1: [],
+                objArr2: [],
+                objArr3: [],
             },
             meArr: [{
                 num: undefined,
@@ -231,8 +255,14 @@ describe('mapperJsonC 测试', function () {
                 me: undefined,
                 me1: undefined,
                 me2: undefined,
-                meArr: undefined
+                meArr: undefined,
+                objArr1: [],
+                objArr2: [],
+                objArr3: [],
             }],
+            objArr1: [['1','v11'],['2','v22']],
+            objArr2: [{label:'1',value:'v11'},{label:'2',value:'v22'}],
+            objArr3: [{label:'1',value:'v11'},{label:'2',value:'v22'}]
         });
     });
 });

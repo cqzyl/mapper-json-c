@@ -25,11 +25,18 @@ function mapperJsonC(json, clazz) {
     }
     Object.keys(res).forEach(function (k) {
         var key = k;
-        var cMetadata = Reflect.getMetadata(key, res);
+        var cMetadata = Reflect.getMetadata(key, res) || [];
         /** 当前对应json key */
         var jsonKey = key;
         /** 当前值 */
         var itemVal = json[jsonKey];
+        if (!cMetadata.length) {
+            // 未增加装饰器的类属性
+            // 如果json中存在对应的值，则以json值为准，否则设置为res中的默认值
+            if (itemVal === undefined) {
+                itemVal = res[key];
+            }
+        }
         for (var i = 0; i < cMetadata.length; i++) {
             var cMetadataItem = cMetadata[i];
             if (cMetadataItem.name === 'JsonProperty') {

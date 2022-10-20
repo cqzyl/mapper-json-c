@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.ObjectEntriesProperty = void 0;
+exports.factoryIObjectEntriesProperty = exports.ObjectEntriesProperty = void 0;
 /*
  * @Description: 装饰器 将 { key: value } 转化为数组 entries
  * @Author: ChenQiang
@@ -26,4 +26,21 @@ function ObjectEntriesProperty(agu) {
     };
 }
 exports.ObjectEntriesProperty = ObjectEntriesProperty;
+/**
+ * @description: ObjectEntriesProperty装饰器（对象转数组）逻辑
+ */
+function factoryIObjectEntriesProperty(cMetadataVal, value) {
+    if (cMetadataVal) {
+        var key0_1 = cMetadataVal[0], key1_1 = cMetadataVal[1];
+        return Object.entries(value || {}).map(function (item) {
+            var _a;
+            return (_a = {},
+                _a[key0_1] = item[0],
+                _a[key1_1] = item[1],
+                _a);
+        });
+    }
+    return Object.entries(value || {});
+}
+exports.factoryIObjectEntriesProperty = factoryIObjectEntriesProperty;
 //# sourceMappingURL=ObjectEntriesProperty.js.map

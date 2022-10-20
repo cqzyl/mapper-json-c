@@ -13,59 +13,6 @@ exports.JsonProperty = JsonProperty_1.JsonProperty;
 var ObjectEntriesProperty_1 = require("./decorators/ObjectEntriesProperty");
 exports.ObjectEntriesProperty = ObjectEntriesProperty_1.ObjectEntriesProperty;
 /**
- * @description: ObjectEntriesProperty装饰器（对象转数组）逻辑
- * @param {IObjectEntriesProperty} cMetadataVal
- * @param {any} value
- * @return {Array}
- */
-function factoryIObjectEntriesProperty(cMetadataVal, value) {
-    if (cMetadataVal) {
-        var key0_1 = cMetadataVal[0], key1_1 = cMetadataVal[1];
-        return Object.entries(value || {}).map(function (item) {
-            var _a;
-            return (_a = {},
-                _a[key0_1] = item[0],
-                _a[key1_1] = item[1],
-                _a);
-        });
-    }
-    return Object.entries(value || {});
-}
-/**
- * @description: JsonProperty装饰器（赋值）逻辑
- * @param {IJsonProperty} cMetadataVal
- * @param {T} json
- * @param {keyof} jsonKey
- * @return {{ key: string; value: any }}
- */
-function factoryJsonProperty(cMetadataVal, json, jsonKey) {
-    var key = null;
-    var value = null;
-    switch (typeof cMetadataVal) {
-        case 'string':
-            key = cMetadataVal;
-            value = json[key];
-            break;
-        case 'object':
-            key = cMetadataVal.name || jsonKey;
-            var nextJson = json[key];
-            if (cMetadataVal.clazz && nextJson instanceof Array) {
-                value = nextJson.map(function (ele) { return mapperJsonC(ele, cMetadataVal.clazz); });
-            }
-            else if (cMetadataVal.clazz && typeof nextJson === 'object') {
-                value = mapperJsonC(nextJson, cMetadataVal.clazz);
-            }
-            else {
-                value = nextJson;
-            }
-            break;
-        default:
-            key = jsonKey;
-            value = json[jsonKey];
-    }
-    return { key: key, value: value };
-}
-/**
  * @description: 实例
  * @param {Object} json json数据，也许来源于后端
  * @param {new} clazz 数据实例
@@ -86,12 +33,12 @@ function mapperJsonC(json, clazz) {
         for (var i = 0; i < cMetadata.length; i++) {
             var cMetadataItem = cMetadata[i];
             if (cMetadataItem.name === 'JsonProperty') {
-                var _a = factoryJsonProperty(cMetadataItem.value, json, jsonKey), key_1 = _a.key, value = _a.value;
+                var _a = (0, JsonProperty_1.factoryJsonProperty)(cMetadataItem.value, json, jsonKey), key_1 = _a.key, value = _a.value;
                 jsonKey = key_1;
                 itemVal = value;
             }
             else if (cMetadataItem.name === 'ObjectEntriesProperty') {
-                itemVal = factoryIObjectEntriesProperty(cMetadataItem.value, itemVal);
+                itemVal = (0, ObjectEntriesProperty_1.factoryIObjectEntriesProperty)(cMetadataItem.value, itemVal);
             }
         }
         res[key] = itemVal;

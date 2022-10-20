@@ -112,6 +112,32 @@ describe('mapperJsonC 测试', function () {
             me: 'str'
         });
     });
+    
+    it('对于定义为对象或数组,已设置初始化值,但json对应的属性为undefind的赋值', function () {
+        class TestEntity {
+            @JsonProperty('test')
+            test: string = undefined;
+
+            @JsonProperty({ name: 'me', clazz: TestEntity })
+            me: TestEntity = void 0;
+
+            @JsonProperty({ name: 'me1', clazz: TestEntity })
+            me1: TestEntity[] = [];
+            
+            @JsonProperty({ name: 'me2', clazz: TestEntity })
+            me2?: TestEntity[] = void 0;
+        }
+        const endVal = mapperJsonC({
+            test: 1,
+        }, TestEntity);
+
+        expect(endVal).to.deep.equal({
+            test: 1,
+            me: undefined,
+            me1: [],
+            me2: undefined,
+        });
+    });
 
     
     it('对象key-value转换', function () {
@@ -213,7 +239,7 @@ describe('mapperJsonC 测试', function () {
                 me: undefined,
                 me1: undefined,
                 me2: undefined,
-                meArr: undefined,
+                meArr: [],
                 objArr1: [],
                 objArr2: [],
                 objArr3: [],
@@ -227,7 +253,7 @@ describe('mapperJsonC 测试', function () {
                 me: undefined,
                 me1: undefined,
                 me2: undefined,
-                meArr: undefined,
+                meArr: [],
                 objArr1: [],
                 objArr2: [],
                 objArr3: [],
@@ -241,7 +267,7 @@ describe('mapperJsonC 测试', function () {
                 me: undefined,
                 me1: undefined,
                 me2: undefined,
-                meArr: undefined,
+                meArr: [],
                 objArr1: [],
                 objArr2: [],
                 objArr3: [],
@@ -255,7 +281,7 @@ describe('mapperJsonC 测试', function () {
                 me: undefined,
                 me1: undefined,
                 me2: undefined,
-                meArr: undefined,
+                meArr: [],
                 objArr1: [],
                 objArr2: [],
                 objArr3: [],

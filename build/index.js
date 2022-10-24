@@ -32,10 +32,9 @@ function mapperJsonC(json, clazz) {
         var itemVal = json[jsonKey];
         if (!cMetadata.length) {
             // 未增加装饰器的类属性
-            // 如果json中存在对应的值，则以json值为准，否则设置为res中的默认值
-            if (itemVal === undefined) {
-                itemVal = res[key];
-            }
+            // 设置为res中的默认值(不进行操作)
+            // itemVal = res[key] as never
+            return false;
         }
         for (var i = 0; i < cMetadata.length; i++) {
             var cMetadataItem = cMetadata[i];

@@ -6,15 +6,13 @@ exports.factoryJsonProperty = exports.JsonProperty = void 0;
  * @Author: ChenQiang
  * @Date: 2021-12-20 11:34:33
  * @LastEditors: ChenQiang
- * @LastEditTime: 2021-12-21 11:46:05
+ * @LastEditTime: 2023-04-12 08:34:09
  * @FilePath: \src\decorators\JsonProperty.ts
  */
 require("reflect-metadata");
 var __1 = require("..");
 /**
  * @description: 属性装饰器
- * @param {IJsonProperty} agu
- * @return {*}
  */
 function JsonProperty(agu) {
     return function (target, propertyKey) {

@@ -1,19 +1,17 @@
 "use strict";
 exports.__esModule = true;
-exports.factoryIObjectEntriesProperty = exports.ObjectEntriesProperty = void 0;
+exports.factoryObjectEntriesProperty = exports.ObjectEntriesProperty = void 0;
 /*
  * @Description: 装饰器 将 { key: value } 转化为数组 entries
  * @Author: ChenQiang
  * @Date: 2022-07-27 17:12:03
  * @LastEditors: ChenQiang
- * @LastEditTime: 2022-07-27 17:12:04
+ * @LastEditTime: 2023-04-12 08:33:58
  * @FilePath: \src\decorators\ObjectEntriesProperty.ts
  */
 require("reflect-metadata");
 /**
  * @description: 属性装饰器
- * @param {IJsonProperty} agu
- * @return {*}
  */
 function ObjectEntriesProperty(agu) {
     return function (target, propertyKey) {
@@ -29,7 +27,7 @@ exports.ObjectEntriesProperty = ObjectEntriesProperty;
 /**
  * @description: ObjectEntriesProperty装饰器（对象转数组）逻辑
  */
-function factoryIObjectEntriesProperty(cMetadataVal, value) {
+function factoryObjectEntriesProperty(cMetadataVal, value) {
     if (cMetadataVal) {
         var key0_1 = cMetadataVal[0], key1_1 = cMetadataVal[1];
         return Object.entries(value || {}).map(function (item) {
@@ -42,5 +40,5 @@ function factoryIObjectEntriesProperty(cMetadataVal, value) {
     }
     return Object.entries(value || {});
 }
-exports.factoryIObjectEntriesProperty = factoryIObjectEntriesProperty;
+exports.factoryObjectEntriesProperty = factoryObjectEntriesProperty;
 //# sourceMappingURL=ObjectEntriesProperty.js.map

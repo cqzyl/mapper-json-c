@@ -1,4 +1,6 @@
 import { IJsonProperty, JsonProperty } from "./decorators/JsonProperty";
+import { ILockNumber, LockNumber } from "./decorators/LockNumber";
+import { ILockString, LockString } from "./decorators/LockString";
 import { IObjectEntriesProperty, ObjectEntriesProperty } from "./decorators/ObjectEntriesProperty";
 /**
  * @description: 实例
@@ -7,4 +9,4 @@ import { IObjectEntriesProperty, ObjectEntriesProperty } from "./decorators/Obje
  * @return {T}
  */
 declare function mapperJsonC<T>(json: Object, clazz: new () => T): T;
-export { IJsonProperty, JsonProperty, IObjectEntriesProperty, ObjectEntriesProperty, mapperJsonC, };
+export { IJsonProperty, JsonProperty, IObjectEntriesProperty, ObjectEntriesProperty, ILockString, LockString, ILockNumber, LockNumber, mapperJsonC, };

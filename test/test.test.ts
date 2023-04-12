@@ -3,12 +3,12 @@
  * @Author: ChenQiang
  * @Date: 2021-12-21 10:17:37
  * @LastEditors: ChenQiang
- * @LastEditTime: 2021-12-22 14:58:03
+ * @LastEditTime: 2023-04-12 13:48:34
  * @FilePath: \test\test.test.ts
  */
 import 'mocha'
 import { expect } from 'chai';
-import { JsonProperty, ObjectEntriesProperty, mapperJsonC } from '../build';
+import { JsonProperty, LockNumber, LockString, ObjectEntriesProperty, mapperJsonC } from '../build';
 
 // test code
 
@@ -166,6 +166,154 @@ describe('mapperJsonC 测试', function () {
         });
     });
 
+    it('锁定数据类型为数字', function () {
+        class TestEntity {
+            @LockNumber()
+            num: number = undefined;
+            @LockNumber()
+            isNum: number = undefined;
+            @LockNumber()
+            canBeNum: number = undefined;
+            @LockNumber()
+            float: number = undefined;
+            @LockNumber('bigint')
+            bigint: number = undefined;
+            @LockNumber()
+            notNum: number = undefined;
+            @LockNumber()
+            notNum1: number = undefined;
+            @LockNumber()
+            notNum2: number = undefined;
+            @LockNumber()
+            notNum3: number = undefined;
+            @LockNumber()
+            notNum4: number = undefined;
+            @LockNumber()
+            notNum5: number = undefined;
+            @LockNumber()
+            notNum6: number = undefined;
+        }
+        const endVal = mapperJsonC({
+            num: 1,
+            isNum: '2',
+            canBeNum: '3test',
+            float: '4.0001',
+            bigint: '123456789123456789',
+            notNum: 'test',
+            notNum1: ['test'],
+            notNum2: {test: 2},
+            notNum3: () => 3,
+            notNum4: false,
+            notNum5: Symbol(),
+            notNum6: class{}
+        }, TestEntity);
+
+        expect(endVal).to.deep.equal({
+            num: 1,
+            isNum: 2,
+            canBeNum: 3,
+            float: 4.0001,
+            bigint: 123456789123456789n,
+            notNum: undefined,
+            notNum1: undefined,
+            notNum2: undefined,
+            notNum3: undefined,
+            notNum4: undefined,
+            notNum5: undefined,
+            notNum6: undefined,
+        });
+    });
+    
+    it('锁定数据类型为字符串', function () {
+        class TestEntity {
+            @LockString()
+            str: string = undefined;
+            @LockString()
+            canBeStr: string = undefined;
+            @LockString()
+            canBeStr1: string = undefined;
+            @LockString()
+            canBeStr2: string = undefined;
+            @LockString()
+            canBeStr3: string = undefined;
+            @LockString()
+            canBeStr4: string = undefined;
+            @LockString('json')
+            jsonStr: string = undefined;
+            @LockString()
+            notStr1: string = undefined;
+            @LockString()
+            notStr2: string = undefined;
+            @LockString()
+            notStr3: string = undefined;
+            @LockString()
+            notStr4: string = undefined;
+            @LockString()
+            notStr5: string = undefined;
+            @LockString('force')
+            forceStr1: string = undefined;
+            @LockString('force')
+            forceStr2: string = undefined;
+            @LockString('force')
+            forceStr3: string = undefined;
+            @LockString('force')
+            forceStr4: string = undefined;
+            @LockString('force')
+            forceStr5: string = undefined;
+            @LockString('force')
+            forceStr6: string = undefined;
+            @LockString('forceAll')
+            forceAllStr1: string = undefined;
+            @LockString('forceAll')
+            forceAllStr2: string = undefined;
+        }
+        const endVal = mapperJsonC({
+            str: 'str',
+            canBeStr: 123,
+            canBeStr1: undefined,
+            canBeStr2: null,
+            canBeStr3: false,
+            canBeStr4: 123456789123456789n,
+            jsonStr: {test: 2},
+            notStr1: ['test'],
+            notStr2: {test: 2},
+            notStr3: () => 3,
+            notStr4: Symbol(),
+            notStr5: class{},
+            forceStr1: ['test'],
+            forceStr2: {test: 2},
+            forceStr3: false,
+            forceStr4: Symbol(),
+            forceStr5: undefined,
+            forceStr6: null,
+            forceAllStr1: undefined,
+            forceAllStr2: null,
+        }, TestEntity);
+
+        expect(endVal).to.deep.equal({
+            str: 'str',
+            canBeStr: '123',
+            canBeStr1: '',
+            canBeStr2: '',
+            canBeStr3: 'false',
+            canBeStr4: '123456789123456789',
+            jsonStr: '{\"test\":2}',
+            notStr1: '',
+            notStr2: '',
+            notStr3: '',
+            notStr4: '',
+            notStr5: '',
+            forceStr1: 'test',
+            forceStr2: '[object Object]',
+            forceStr3: 'false',
+            forceStr4: 'Symbol()',
+            forceStr5: '',
+            forceStr6: '',
+            forceAllStr1: 'undefined',
+            forceAllStr2: 'null',
+        });
+    });
+
     
     it('综合测试', function () {
         class TestEntity {
@@ -192,6 +340,12 @@ describe('mapperJsonC 测试', function () {
             
             @JsonProperty({ name: 'me', clazz: TestEntity })
             me2: TestEntity = void 0;
+
+            @LockNumber()
+            num1: number = void 0;
+
+            @LockString()
+            str1: string = void 0;
             
             @JsonProperty({ name: 'meArr', clazz: TestEntity })
             meArr: TestEntity[] = [];
@@ -217,11 +371,13 @@ describe('mapperJsonC 测试', function () {
             me1: { num: 1 },
             me2: { num: 2 },
             me3: { num: 3 },
+            num1: '1',
+            str1: 2,
             meArr: [{}],
-            
             objArr1: {1:'v11',2:'v22'},
             objArr2: {1:'v11',2:'v22'},
             objArr0: {1:'v11',2:'v22'},
+            undefindKey: '1',
         }, TestEntity);
 
         expect(endVal).to.deep.equal({
@@ -239,6 +395,8 @@ describe('mapperJsonC 测试', function () {
                 me: undefined,
                 me1: undefined,
                 me2: undefined,
+                num1: undefined,
+                str1: '',
                 meArr: [],
                 objArr1: [],
                 objArr2: [],
@@ -253,6 +411,8 @@ describe('mapperJsonC 测试', function () {
                 me: undefined,
                 me1: undefined,
                 me2: undefined,
+                num1: undefined,
+                str1: '',
                 meArr: [],
                 objArr1: [],
                 objArr2: [],
@@ -267,11 +427,15 @@ describe('mapperJsonC 测试', function () {
                 me: undefined,
                 me1: undefined,
                 me2: undefined,
+                num1: undefined,
+                str1: '',
                 meArr: [],
                 objArr1: [],
                 objArr2: [],
                 objArr3: [],
             },
+            num1: 1,
+            str1: '2',
             meArr: [{
                 num: undefined,
                 str: undefined,
@@ -281,6 +445,8 @@ describe('mapperJsonC 测试', function () {
                 me: undefined,
                 me1: undefined,
                 me2: undefined,
+                num1: undefined,
+                str1: '',
                 meArr: [],
                 objArr1: [],
                 objArr2: [],
@@ -288,7 +454,7 @@ describe('mapperJsonC 测试', function () {
             }],
             objArr1: [['1','v11'],['2','v22']],
             objArr2: [{label:'1',value:'v11'},{label:'2',value:'v22'}],
-            objArr3: [{label:'1',value:'v11'},{label:'2',value:'v22'}]
+            objArr3: [{label:'1',value:'v11'},{label:'2',value:'v22'}],
         });
     });
 });

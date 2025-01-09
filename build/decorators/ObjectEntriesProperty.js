@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 exports.factoryObjectEntriesProperty = exports.ObjectEntriesProperty = void 0;
 /*
  * @Description: 装饰器 将 { key: value } 转化为数组 entries

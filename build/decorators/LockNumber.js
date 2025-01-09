@@ -1,12 +1,12 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 exports.factoryLockNumber = exports.LockNumber = void 0;
 /*
  * @Description: 装饰器 - 锁定为数字
  * @Author: ChenQiang
  * @Date: 2021-12-20 11:34:33
  * @LastEditors: ChenQiang
- * @LastEditTime: 2023-04-12 10:07:39
+ * @LastEditTime: 2025-01-09 10:42:16
  * @FilePath: \src\decorators\LockNumber.ts
  */
 require("reflect-metadata");
@@ -49,6 +49,9 @@ function factoryLockNumber(cMetadataVal, value) {
             // 整数
             return parseInt(value);
         }
+    }
+    if (cMetadataVal === 'array' && value instanceof Array) {
+        return value.map(function (e) { return factoryLockNumber(undefined, e); });
     }
     // 非数字类型
     return undefined;

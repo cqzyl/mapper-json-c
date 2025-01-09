@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 exports.mapperJsonC = exports.LockNumber = exports.LockString = exports.ObjectEntriesProperty = exports.JsonProperty = void 0;
 /*
  * @Description: 实例
@@ -9,13 +9,13 @@ exports.mapperJsonC = exports.LockNumber = exports.LockString = exports.ObjectEn
  * @LastEditTime: 2023-04-12 09:30:15
  */
 var JsonProperty_1 = require("./decorators/JsonProperty");
-Object.defineProperty(exports, "JsonProperty", { enumerable: true, get: function () { return JsonProperty_1.JsonProperty; } });
+exports.JsonProperty = JsonProperty_1.JsonProperty;
 var LockNumber_1 = require("./decorators/LockNumber");
-Object.defineProperty(exports, "LockNumber", { enumerable: true, get: function () { return LockNumber_1.LockNumber; } });
+exports.LockNumber = LockNumber_1.LockNumber;
 var LockString_1 = require("./decorators/LockString");
-Object.defineProperty(exports, "LockString", { enumerable: true, get: function () { return LockString_1.LockString; } });
+exports.LockString = LockString_1.LockString;
 var ObjectEntriesProperty_1 = require("./decorators/ObjectEntriesProperty");
-Object.defineProperty(exports, "ObjectEntriesProperty", { enumerable: true, get: function () { return ObjectEntriesProperty_1.ObjectEntriesProperty; } });
+exports.ObjectEntriesProperty = ObjectEntriesProperty_1.ObjectEntriesProperty;
 /**
  * @description: 实例
  * @param {Object} json json数据，也许来源于后端

@@ -3,11 +3,11 @@ interface IJsonPropertyObj {
     clazz: new () => object;
     name?: string;
 }
-export declare type IJsonProperty = string | IJsonPropertyObj;
+export type IJsonProperty = string | IJsonPropertyObj;
 /**
  * @description: 属性装饰器
  */
-export declare function JsonProperty(agu?: IJsonProperty): (target: any, propertyKey: string) => void;
+export declare function JsonProperty(agu?: IJsonProperty): (target: any, propertyKey: string) => any;
 /**
  * @description: JsonProperty装饰器（赋值）逻辑
  */

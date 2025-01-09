@@ -1,9 +1,9 @@
 import 'reflect-metadata';
-export declare type ILockNumber = 'bigint' | undefined;
+export type ILockNumber = 'bigint' | undefined;
 /**
  * @description: 属性装饰器
  */
-export declare function LockNumber(agu?: ILockNumber): (target: any, propertyKey: string) => void;
+export declare function LockNumber(agu?: ILockNumber): (target: any, propertyKey: string) => any;
 /**
  * @description: LockNumber 装饰器 (锁定数字) 逻辑
  */

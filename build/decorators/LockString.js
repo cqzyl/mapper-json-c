@@ -1,5 +1,5 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.factoryLockString = exports.LockString = void 0;
 /*
  * @Description: 装饰器 - 锁定为字符串

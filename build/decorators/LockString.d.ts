@@ -1,9 +1,9 @@
 import 'reflect-metadata';
-export declare type ILockString = 'force' | 'forceAll' | 'json' | undefined;
+export type ILockString = 'force' | 'forceAll' | 'json' | undefined;
 /**
  * @description: 属性装饰器
  */
-export declare function LockString(agu?: ILockString): (target: any, propertyKey: string) => void;
+export declare function LockString(agu?: ILockString): (target: any, propertyKey: string) => any;
 /**
  * @description: LockString 装饰器 (锁定字符串) 逻辑
  */

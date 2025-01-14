@@ -7,4 +7,4 @@ export declare function LockString(agu?: ILockString): (target: any, propertyKey
 /**
  * @description: LockString 装饰器 (锁定字符串) 逻辑
  */
-export declare function factoryLockString(cMetadataVal: ILockString, value: any): string | string[];
+export declare function factoryLockString(cMetadataVal: ILockString, value: any): string | any[];

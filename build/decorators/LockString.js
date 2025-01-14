@@ -6,7 +6,7 @@ exports.factoryLockString = exports.LockString = void 0;
  * @Author: ChenQiang
  * @Date: 2021-12-20 11:34:33
  * @LastEditors: ChenQiang
- * @LastEditTime: 2025-01-09 10:37:15
+ * @LastEditTime: 2025-01-14 15:08:00
  * @FilePath: \src\decorators\LockString.ts
  */
 require("reflect-metadata");
@@ -48,13 +48,21 @@ function factoryLockString(cMetadataVal, value) {
     }
     if (cMetadataVal === 'array' && value instanceof Array) {
         return value.map(function (e) {
-            if (typeof e === 'string') {
-                return e;
+            switch (typeof e) {
+                case 'string':
+                    return e;
+                case 'number':
+                case 'bigint':
+                case 'boolean':
+                    return String(e);
+                case 'object':
+                case 'symbol':
+                    return e === null ? '' : e;
+                case 'undefined':
+                case 'function':
+                default:
+                    return '';
             }
-            if (['number', 'boolean', 'bigint'].includes(typeof value)) {
-                return String(value);
-            }
-            return '';
         });
     }
     // 非字符串类型

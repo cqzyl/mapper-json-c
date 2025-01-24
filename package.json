@@ -17,6 +17,9 @@
     "url": "git+hhttps://github.com/cqzyl/mapper-json-c.git"
   },
   "homepage": "https://github.com/cqzyl/mapper-json-c#readme",
+  "files": [
+    "build"
+  ],
   "mocha": {
     "require": [
       "ts-node/register",

@@ -1,12 +1,12 @@
 "use strict";
 exports.__esModule = true;
-exports.mapperJsonC = exports.LockNumber = exports.LockString = exports.ObjectEntriesProperty = exports.JsonProperty = void 0;
+exports.mapperJsonC = exports.LockNumber = exports.LockString = exports.ObjectEntriesProperty = exports.JsonFormat = exports.JsonProperty = void 0;
 /*
  * @Description: 实例
  * @Author: ChenQiang
  * @Date: 2021-12-20 09:13:14
  * @LastEditors: ChenQiang
- * @LastEditTime: 2023-04-12 09:30:15
+ * @LastEditTime: 2025-01-24 14:24:04
  */
 var JsonProperty_1 = require("./decorators/JsonProperty");
 exports.JsonProperty = JsonProperty_1.JsonProperty;
@@ -16,6 +16,8 @@ var LockString_1 = require("./decorators/LockString");
 exports.LockString = LockString_1.LockString;
 var ObjectEntriesProperty_1 = require("./decorators/ObjectEntriesProperty");
 exports.ObjectEntriesProperty = ObjectEntriesProperty_1.ObjectEntriesProperty;
+var JsonFormat_1 = require("./decorators/JsonFormat");
+exports.JsonFormat = JsonFormat_1.JsonFormat;
 /**
  * @description: 实例
  * @param {Object} json json数据，也许来源于后端
@@ -47,6 +49,9 @@ function mapperJsonC(json, clazz) {
                     var _a = (0, JsonProperty_1.factoryJsonProperty)(cMetadataItem.value, json, jsonKey), key_1 = _a.key, value = _a.value;
                     jsonKey = key_1;
                     itemVal = value;
+                    break;
+                case 'JsonFormat':
+                    itemVal = (0, JsonFormat_1.factoryJsonFormat)(cMetadataItem.value, itemVal);
                     break;
                 case 'ObjectEntriesProperty':
                     itemVal = (0, ObjectEntriesProperty_1.factoryObjectEntriesProperty)(cMetadataItem.value, itemVal);

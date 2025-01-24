@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.factoryLockNumber = exports.JsonFormat = void 0;
+exports.factoryJsonFormat = exports.JsonFormat = void 0;
 require("reflect-metadata");
 var dayjs = require("dayjs");
 /**
@@ -20,10 +20,7 @@ exports.JsonFormat = JsonFormat;
 /**
  * @description: JsonFormat 装饰器 date格式化，默认输出毫秒数
  */
-function factoryLockNumber(cMetadataVal, value) {
-    if (typeof value === 'number') {
-        return value;
-    }
+function factoryJsonFormat(cMetadataVal, value) {
     var dayObj = dayjs(value);
     if (dayObj.isValid()) {
         if (cMetadataVal) {
@@ -33,10 +30,10 @@ function factoryLockNumber(cMetadataVal, value) {
         return dayObj.valueOf();
     }
     if (value instanceof Array) {
-        return value.map(function (e) { return factoryLockNumber(cMetadataVal, e); });
+        return value.map(function (e) { return factoryJsonFormat(cMetadataVal, e); });
     }
     // 非日期类型，返回原值
     return value;
 }
-exports.factoryLockNumber = factoryLockNumber;
+exports.factoryJsonFormat = factoryJsonFormat;
 //# sourceMappingURL=JsonFormat.js.map

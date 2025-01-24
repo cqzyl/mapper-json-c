@@ -8,5 +8,5 @@ declare type INumberType = number | string | void;
 /**
  * @description: JsonFormat 装饰器 date格式化，默认输出毫秒数
  */
-export declare function factoryLockNumber(cMetadataVal: IJsonFormat, value: any): INumberType | Array<INumberType>;
+export declare function factoryJsonFormat(cMetadataVal: IJsonFormat, value: any): INumberType | Array<INumberType>;
 export {};

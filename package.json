@@ -1,6 +1,6 @@
 {
   "name": "mapper-json-c",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "mapper for json",
   "main": "build/index.js",
   "types": "build/index.d.ts",
